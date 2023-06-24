@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:graduation/customize_sounds.dart';
+import 'package:graduation/display_mode_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -55,7 +57,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: 15,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => DisplayScreen(),
+                ));
+              },
               child: ListTile(
                 title: Text(
                   'Display mode',
@@ -78,58 +84,62 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: () {
                 showDialog(
                   context: context,
-                  builder: (context) => StatefulBuilder(
-                    builder: (context,setState) {
-                      return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Color(0xFF333333),width: 3)
+                  builder: (context) =>
+                      StatefulBuilder(builder: (context, setState) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Color(0xFF333333), width: 3)),
+                      backgroundColor: Color(0xFFD8D7D7),
+                      title: Text(
+                        'Please Select How You Want The Output To Be :',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF484852),
                         ),
-                        backgroundColor: Color(0xFFD8D7D7),
-                        title: Text(
-                          'Please Select How You Want The Output To Be :',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color(0xFF484852),
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CheckboxListTile(
+                            value: isEmogi,
+                            onChanged: (value) {
+                              setState(() {
+                                isEmogi = value ?? false;
+                              });
+                            },
+                            title: Text(
+                              'EMOGI',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                            checkColor: Colors.black,
+                            enabled: true,
+                            activeColor: Color(0xFF8588C7),
                           ),
-                        ),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CheckboxListTile(
-                              value: isEmogi,
-                              onChanged: (value) {
-                               setState((){
-                                 isEmogi = value??false;
-                               });
-                              },
-                              title: Text('EMOGI',style: TextStyle(
+                          CheckboxListTile(
+                            value: isText,
+                            onChanged: (value) {
+                              setState(() {
+                                isText = value ?? false;
+                              });
+                            },
+                            title: Text(
+                              'Text',
+                              style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
-                              ),),
-                              checkColor: Colors.black,
-                              enabled: true,
-                              activeColor: Color(0xFF8588C7),
+                              ),
                             ),
-                            CheckboxListTile(
-                              value: isText,
-                              onChanged: (value) {
-                               setState((){
-                                 isText = value??false;
-                               });
-                              },
-                              title: Text('Text',style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),),
-                              checkColor: Colors.black,
-                              enabled: true,
-                              activeColor: Color(0xFF8588C7),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                  ),
+                            checkColor: Colors.black,
+                            enabled: true,
+                            activeColor: Color(0xFF8588C7),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                 );
               },
               child: ListTile(
@@ -151,7 +161,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: 15,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomizeSoundScreen(),));
+              },
               child: ListTile(
                 title: Text(
                   'Customize Sounds',
